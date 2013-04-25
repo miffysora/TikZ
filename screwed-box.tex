@@ -1,0 +1,30 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\begin{document}
+\tdplotsetmaincoords{75}{15}
+\begin{tikzpicture}[tdplot_main_coords]
+\def\slope{1.8}
+\def\slopex{0.7}
+\draw[thick,dashed,->] (0,0,0) -- (0,4,0) node[anchor=north west]{$\mathbf{v}$};
+\draw[-] (3,0,0)--(3,4,0) node[anchor=south]{};
+\draw[-] (3+\slopex,0,\slope)--(3+\slopex,4,\slope) node[anchor=south]{};
+\draw[-] (\slopex,0,\slope)--(\slopex,4,\slope) node[anchor=south]{};
+\draw[->] (0,0,0)--(0,0,2) node[anchor=south]{$\mathbf{u}\times \mathbf{v}$};
+\draw[thick,->] (0,0,0) -- (3,0,0) node[anchor=north east]{$\mathbf{u}$};
+\draw[dashed,-] (0,4,0) -- (3,4,0) node[anchor=north east]{};
+\draw[-] (\slopex,0,\slope) -- (3+\slopex,0,\slope) node[anchor=north east]{};
+\draw[-] (\slopex,4,\slope) -- (3+\slopex,4,\slope) node[anchor=north east]{};
+\draw[thick,->] (0,0,0) -- (\slopex,0,\slope) node[anchor=north east]{$\mathbf{w}$};
+\draw[-] (3,0,0) -- (3+\slopex,0,\slope) node[anchor=north east]{};
+\draw[-] (3,4,0) -- (3+\slopex,4,\slope) node[anchor=north east]{};
+\draw[dashed,-] (0,4,0) -- (\slopex,4,\slope) node[anchor=north east]{};
+\def\ay{0}
+\def\az{\slope}
+\tdplotgetpolarcoords{\slopex}{\ay}{\az}
+\tdplotsetthetaplanecoords{\tdplotresphi}
+\tdplotdrawarc[tdplot_rotated_coords]{(0,0,0)}{1}{0}
+{\tdplotrestheta}{anchor=south}{$\phi$}
+%\tdplotdrawarc[-] (\slopex*0.3,0.3,0) arc(0:90:2.1);
+\end{tikzpicture}
+\end{document} 
