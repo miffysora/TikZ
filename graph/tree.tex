@@ -1,0 +1,18 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata,shadows,fit,shapes}
+ 
+\begin{document}
+\begin{tikzpicture}
+\tikzstyle{every node}=[draw,shape=circle];
+\tikzstyle{level 1}=[sibling distance=20mm];
+\tikzstyle{level 2}=[sibling distance=30mm];
+\node {C}
+child {node {B}
+    child {node {D}}
+    }
+child {node {D}}
+child {node {A}}
+;
+\end{tikzpicture}
+  \end{document}
