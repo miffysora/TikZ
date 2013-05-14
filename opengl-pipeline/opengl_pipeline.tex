@@ -1,0 +1,39 @@
+\documentclass[border=10pt]{standalone}
+\def\pgfsysdriver{pgfsys-pdftex.def}%fading可能
+%\usepackage{zxjatype}%require xetex
+\usepackage[usenames,dvipsnames,svgnames,x11names,table]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning,automata,shadows,fit,shapes,patterns,fadings}
+\usetikzlibrary{shadows,calc}
+\begin{document}
+\tikzstyle{miffysora}=[fill=lime,draw=OliveDrab,ultra thick]
+\tikzstyle{miffysora_line}=[draw=OliveDrab,ultra thick]
+\tikzstyle{data} = [rounded rectangle, rounded rectangle arc length=90, rounded rectangle east arc=concave, minimum height=4em]
+\begin{tikzpicture}
+\path
+(0,0) node[data,miffysora](pixeldata){Pixel Data}
+(4.5,0) node[data,miffysora](vertexdata){Vertex Data}
+(2,-1.5) node[rectangle,miffysora](displaylist){Display List}
+(0,-3) node[rectangle,miffysora](pixeloperation){Pixel Operations}
+(4.5,-2) node[rectangle,miffysora](evaluator){Evaluators}
+(4.5,-4) node[rectangle,miffysora,text width=70,text badly centered](pvo_pa){Per-Vertex    operations and Primitive Assembly}
+(4.5,-6) node[rectangle,miffysora,text width=70](pfo){Per-fragment operations}
+(4.5,-7.5) node[rectangle,miffysora](fb){Frame Buffer}
+(1.5,-4.5) node[rectangle,miffysora](rasterization){Rasterization}
+(0,-6) node[rectangle,miffysora,text width=50,text badly centered](texture_assembly){Texture Assembly};
+\draw[->,dashed,miffysora](pixeloperation.north)--(pixeldata.south);
+\draw[->,miffysora_line](vertexdata.west)-|($(displaylist.north)+(0.5,0)$);
+\draw[->,miffysora_line]($(pixeldata.east)+(-0.3,0)$)-|($(displaylist.north)+(-0.5,0)$);
+\draw[->,miffysora_line](displaylist.east)--(evaluator.north);
+\draw[->,miffysora_line](displaylist.south)--(pixeloperation.north);
+\draw[->,miffysora_line](pixeloperation.east)-|(rasterization.north);
+\draw[->,miffysora_line](pixeloperation.south)-|(texture_assembly.north);
+\draw[->,miffysora_line](texture_assembly.east)-|($(rasterization.south)+(-0.5,0)$);
+\draw[->,miffysora_line](vertexdata.south)--(evaluator.north);
+\draw[->,miffysora_line](evaluator.south)--(pvo_pa.north);
+\draw[->,miffysora_line](pvo_pa.west)--(rasterization.east);
+\draw[->,miffysora_line]($(rasterization.south)+(0.5,0)$)--(pfo.west);
+\draw[->,miffysora_line](pfo.south)--(fb.north);
+\draw[->,miffysora_line,dashed](fb.west)-|(pixeloperation.west);
+\end{tikzpicture}
+\end{document}
